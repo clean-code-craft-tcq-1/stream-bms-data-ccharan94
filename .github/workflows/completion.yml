@@ -17,11 +17,5 @@ jobs:
     - name: Check duplications
       run: jscpd . --min-lines 3 --min-tokens 35 --threshold 0
       
-    - name: Install lizard
-      run: pip install lizard
-
-    - name: Limit complexity
-      run: $HOME/.local/bin/lizard --CCN 3
-      
     - name: Testcases
-      run: python BMS_Sender_test.py
+      run: python bms_sender_test.py
