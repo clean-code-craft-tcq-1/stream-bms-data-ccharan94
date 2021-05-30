@@ -2,8 +2,9 @@ import random
 
 allowed_formats = ['json']
 
-bms_parameter_limits = { "temperature" : { "min" : 0, "max": 45 },
-                          "soc"        : { "min" : 20, "max": 80 }
+bms_parameter_limits = { 
+                          "temperature" : { "min" : 0, "max": 45 },
+                          "soc"         : { "min" : 20, "max": 80 }
                        }
 
 def getBatteryParameters(stream_format):
