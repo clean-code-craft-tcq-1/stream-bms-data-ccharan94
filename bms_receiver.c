@@ -13,7 +13,7 @@ char Attribute1[Length],Attribute2[Length];
   //scanf("%11c[^:]%f,%3c[^:]%f\n", Attribute1, &AttributeValue1, Attribute2, &AttributeValue2);
 	//printf("%f,%f\n",AttributeValue1, AttributeValue2);
  scanf("%s%f%s%f\n", Attribute1, &AttributeValue1, Attribute2, &AttributeValue2);
-	printf("%s%f%s%f",Attribute1, AttributeValue1, Attribute2, AttributeValue2);
+	printf("%s%0.2f,%s%f\n",Attribute1, AttributeValue1, Attribute2, AttributeValue2);
 }
 
 int main()
