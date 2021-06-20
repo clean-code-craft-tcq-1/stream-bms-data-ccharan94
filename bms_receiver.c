@@ -6,7 +6,7 @@
 
 void  ReadSenderdataFromConsole() 
 {
-  int Length=100,line=0;
+  int Length=15,line=0;
 char Attribute1[Length],Attribute2[Length];
 float TemperatureValue[Length];
  float SoCValue[Length];
