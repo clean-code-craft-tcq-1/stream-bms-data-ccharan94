@@ -16,7 +16,7 @@ float TemperatureValue[Length];
    //printf("%s%0.2f,%s0.2%f\n",Attribute1, AttributeValue1, Attribute2, AttributeValue2);
    TemperatureValue[line]=AttributeValue1;
    SoCValue[line]= AttributeValue2;
-   printf("%0.2f,%0.2f\n",TemperatureValue[line],SoCValue[line]);
+   printf("%0.2f,%0.2f\n",AttributeValue1,AttributeValue2);
    
    line++;
  }	 
