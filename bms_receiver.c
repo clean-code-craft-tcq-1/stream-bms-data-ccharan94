@@ -8,15 +8,15 @@ void  ReadSenderdataFromConsole()
 {
   int Length=100,line=0;
 char Attribute1[Length],Attribute2[Length];
-char TemperatureValue[Length];
- char SoCValue[Length];
+float TemperatureValue[Length];
+ float SoCValue[Length];
  float AttributeValue1, AttributeValue2=0;
  while (scanf("%s%f,%s%f\n", Attribute1, &AttributeValue1, Attribute2, &AttributeValue2)!=EOF)
  {
    //printf("%s%0.2f,%s0.2%f\n",Attribute1, AttributeValue1, Attribute2, AttributeValue2);
    TemperatureValue[line]=AttributeValue1;
    SoCValue[line]= AttributeValue2;
-   printf("%f,%f\n",TemperatureValue[line],SoCValue[line]);
+   printf("%0.2f,%0.2f\n",TemperatureValue[line],SoCValue[line]);
    
    line++;
  }	 
