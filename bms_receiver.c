@@ -6,16 +6,16 @@
 
 void  ReadSenderdataFromConsole() 
 {
-  int i=0, length=100;
-char Attribute1[Length],Attribute2[Length]=0;
+  int Length=100;
+char Attribute1[Length],Attribute2[Length];
  float AttributeValue1, AttributeValue2=0;
-//if (scanf("%11c[^:]%f,%3c[^:]%f\n", Attribute1, AttributeValue1, Attribute2,AttributeValue2)==4);
+//if (scanf("%11c[^:]%f,%3c[^:]%f\n", Attribute1, &AttributeValue1, Attribute2,AttributeValue2)==4);
   scanf("%11c[^:]%f,%3c[^:]%f\n", Attribute1, &AttributeValue1, Attribute2, &AttributeValue2);
 	printf("%f,%f\n",AttributeValue1, AttributeValue2);
 }
 
-void main()
+int main()
 {
   ReadSenderdataFromConsole();
-  return0;
+  return 0;
 }
