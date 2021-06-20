@@ -12,8 +12,8 @@ char Attribute1[Length],Attribute2[Length];
 //if (scanf("%11c[^:]%f,%3c[^:]%f\n", Attribute1, &AttributeValue1, Attribute2,AttributeValue2)==4);
   //scanf("%11c[^:]%f,%3c[^:]%f\n", Attribute1, &AttributeValue1, Attribute2, &AttributeValue2);
 	//printf("%f,%f\n",AttributeValue1, AttributeValue2);
- scanf("%s\n", Attribute1);
-	printf("%s",Attribute1);
+ scanf(""%s%f%s%f", Attribute1, &AttributeValue1, Attribute2, &AttributeValue2);
+	printf("%s%f%s%f",Attribute1, AttributeValue1, Attribute2, AttributeValue2);
 }
 
 int main()
