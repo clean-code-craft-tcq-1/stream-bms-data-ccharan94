@@ -1,16 +1,31 @@
+/**********************************************
+Include header files
+***********************************************/
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include "bms_receiver.h"
 
 /***********************************************************************************************************************
+Variable declaration
 **************************************************************************************************************************/
-float MinimumAttributeValueArray[NumberOfAttributes]= {0,0};
+float MinimumAttributeValueArray[NumberOfAttributes]= {100,100};
 float MaximumAttributeValueArray[NumberOfAttributes]= {0,0};
 float Temperature[Max_ArraySize]={};
-float ChargeRate[Max_ArraySize]={};
+float SoC[Max_ArraySize]={};
 int NoOfEntery=0;
 
+/***************************************************************************************************************************
+Function definitions
+****************************************************************************************************************************/
+
+/**************************************************************************************************************************
+ * Function: BMS_Readfromdatafile
+ * Description: This function reads the BMS parameter readings from the suitable 
+   data log file and stores into a buffer  
+ * input: void
+ * returns: Read status is Success(True) if the data is successfully read from the file.
+ ***************************************************************************************************************************/
 OperationMode BMS_ReadfromConsole()
 {
   FILE *BMS_datafile;
@@ -24,28 +39,33 @@ OperationMode BMS_ReadfromConsole()
 
     }
 	
-else
+  else
     {
-    
-      float ReadTemperature=0,ReadChargeRate=0;
-      printf("File open attempt successful\n");
-    
-      while(line != EOF)
-        {
-          line=fscanf(BMS_datafile,"%f %f",&ReadTemperature,&ReadChargeRate);
-          Temperature[Index]=ReadTemperature;
-          ChargeRate[Index]=ReadChargeRate;
-          Index++;
-        }
-        NoOfEntery= Index;
-        ReadStatus= Success;
-    }
+
+	float ReadTemperature=0,ReadSoC=0;
+         printf("File open attempt successful\n");
+
+	      while(line != EOF)
+		{
+		  line=fscanf(BMS_datafile,"%f %f",&ReadTemperature,&ReadChargeRate);
+		  Temperature[Index]=ReadTemperature;
+		  SoC[Index]=ReadSoC;
+		  Index++;
+		}
+		NoOfEntery= Index;
+		ReadStatus= Success;
+	    }
 	
 	fclose(BMS_datafile);
 	return ReadStatus;
 }
-/***********************************************************************************************************************
-**************************************************************************************************************************/
+/***********************************************************************************************************************************
+ * Function: Calculate_TemperatureMinandMaxRange
+ * Description: This function calculates the maximum and minimum range of temperature in a given
+                data array.
+ * input: The number of data values available.	  
+ * returns: NULL, it prints the minimum and maximum value on the console
+ ***********************************************************************************************************************************/
 
 void Calculate_TemperatureMinandMaxRange(int NoOfEnteries)
 {
@@ -54,17 +74,29 @@ void Calculate_TemperatureMinandMaxRange(int NoOfEnteries)
  printf("Minimum and Maximum Temperature in the given range is %0.2f and %0.2f respectively\n",MinimumAttributeValueArray[0],MaximumAttributeValueArray[0]);
 }
 
-/***********************************************************************************************************************
-**************************************************************************************************************************/
-void Calculate_ChargeRateMinandMaxRange(int NoOfEnteries)
+
+/**********************************************************************************************************************************
+ * Function: Calculate_StateOfChargeMinandMaxRange
+ * Description: This function calculates the maximum and minimum range of SoC (State-Of-Charge) in a given
+                data array. 
+ * input: The number of data values available.  
+ * returns: NULL, it prints the minimum and maximum value on the console
+ **********************************************************************************************************************************/
+void Calculate_StateOfChargeMinandMaxRange(int NoOfEnteries)
 {
   
-  Calculate_MinParameterValue(ChargeRate, NoOfEnteries, &MinimumAttributeValueArray[1]);
-  Calculate_MaxParameterValue(ChargeRate, NoOfEnteries, &MaximumAttributeValueArray[1]);
+  Calculate_MinParameterValue(SoC, NoOfEnteries, &MinimumAttributeValueArray[1]);
+  Calculate_MaxParameterValue(SoC, NoOfEnteries, &MaximumAttributeValueArray[1]);
   printf("Minimum and Maximum ChargeRate in the given range is %0.2f and %0.2f respectively\n",MinimumAttributeValueArray[1],MaximumAttributeValueArray[1]);
 }
-/***********************************************************************************************************************
-**************************************************************************************************************************/
+
+
+/*****************************************************************************************************************************
+ * Function: Calculate_MaxParameterValue
+ * Description: This function calculates the maximum value of an attribute in a given range. 
+ * input: The number of data values available, data values and the threshold/reference value.
+ * returns: The maximum value in the given range
+ ****************************************************************************************************************************/
  void Calculate_MaxParameterValue(float AttributeValue[], int NoOfEnteries, float *MaximumAttributeValue)
  {
    for(int i=0; i< NoOfEnteries; i++)
@@ -76,8 +108,14 @@ void Calculate_ChargeRateMinandMaxRange(int NoOfEnteries)
    }
    
  }
-/***********************************************************************************************************************
-**************************************************************************************************************************/    
+
+
+/****************************************************************************************************************************
+ * Function: Calculate_MinParameterValue
+ * Description: This function calculates the minimum value of an attribute in a given range. 
+ * input: The number of data values available, data values and the threshold/reference value.	  
+ * returns: The minimum value in the given range
+ ****************************************************************************************************************************/
 void Calculate_MinParameterValue(float AttributeValue[], int NoOfEnteries, float *MinimumAttributeValue)
  {
   for(int i=0; i< NoOfEnteries; i++)
@@ -89,22 +127,42 @@ void Calculate_MinParameterValue(float AttributeValue[], int NoOfEnteries, float
           }
    }
 }
-/***********************************************************************************************************************
-**************************************************************************************************************************/
+
+
+/*********************************************************************************************************************************
+ * Function: Calculate_TemperatureSimpleMovingAverage
+ * Description: This function calculates the average value of Temperature over latest 5 data points.   
+ * input: The number of data values available.	  
+ * returns: The average value of temperature in the given range
+ *********************************************************************************************************************************/
 void Calculate_TemperatureSimpleMovingAverage(int NoOfEnteries)
 {
   float Temperature_SMA= Calculate_SimpleMovingAverage(Temperature, NoOfEnteries);
   printf("Simple moving average of Temperature is %0.2f\n",Temperature_SMA);
 }
-/***********************************************************************************************************************
-**************************************************************************************************************************/
+
+
+/********************************************************************************************************************************
+ * Function: Calculate_TemperatureSimpleMovingAverage
+ * Description: This function calculates the average value of SoC over latest 5 data points.
+ * input: The number of data values available	  
+ * returns: The average value of temperature in the given range
+ ******************************************************************************************************************************/
 void Calculate_ChargeRateSimpleMovingAverage(int NoOfEnteries)
 {
   float ChargeRate_SMA= Calculate_SimpleMovingAverage(ChargeRate, NoOfEnteries);
   printf("Simple moving average of Charge Rate is %0.2f\n",ChargeRate_SMA);
 }
-/***********************************************************************************************************************
-**************************************************************************************************************************/
+
+
+
+/***********************************************************************************************
+ * Function: Calculate_SimpleMovingAverage
+ * Description: This function calculates the average value of an attribute in a over latest 5 data points. 
+ * input: The number of data values available.	  
+ * returns: The average value of attribute in the given range
+ ***********************************************************************************************/
+
 float Calculate_SimpleMovingAverage(float AttributeValue[], int NoOfEnteries)
 {
   float AttributeAverage = 0;
@@ -119,8 +177,14 @@ float Calculate_SimpleMovingAverage(float AttributeValue[], int NoOfEnteries)
    return AttributeAverage;
   
 }
-/***********************************************************************************************************************
-**************************************************************************************************************************/
+
+
+
+/******************************************************************************************************************************
+ * Function: ReceiveDatafromSender
+ * Description: This function reads the data from Sender, calculates the Min, max and average value of BMS_attribute.	  
+ * returns: The operation was successful
+ *****************************************************************************************************************************/
 OperationMode ReceiveDatafromSender ()
 {
     OperationMode ReadStatus= Failure;
