@@ -18,7 +18,6 @@ jobs:
     - name: run
       run: |
         g++ -Wall -Wextra -fprofile-arcs -ftest-coverage -o testchecker *.c*
-        python ./bms_sender_test.py | ./testchecker
     - name: collect coverage
       run: gcovr --gcov-exclude=".*test.*" -r . --html --html-details -o coverage.html
 
