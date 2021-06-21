@@ -70,12 +70,4 @@ TEST_CASE("Test case to test the Simple Moving Average")
   REQUIRE(abs(average - Actualaverage) < epsilon);
 }
 
-TEST_CASE("Test case to test the SMA when array is empty")
-{
-  float AttributeArray[]={};
-  float Actualaverage = 0;
-  float epsilon = 0.001;
-  int ArraySize= sizeof(AttributeArray)/sizeof(AttributeArray[0]);
-  REQUIRE(Calculate_SimpleMovingAverage(AttributeArray, ArraySize)==Actualaverage);
-  
-}
+
