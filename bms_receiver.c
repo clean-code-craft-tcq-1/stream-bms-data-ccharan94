@@ -82,7 +82,7 @@ void Calculate_TemperatureMinandMaxRange(int NoOfEnteries)
  * input: The number of data values available.  
  * returns: NULL, it prints the minimum and maximum value on the console
  **********************************************************************************************************************************/
-void Calculate_StateOfChargeMinandMaxRange(int NoOfEnteries)
+void Calculate_SoCMinandMaxRange(int NoOfEnteries)
 {
   
   Calculate_MinParameterValue(SoC, NoOfEnteries, &MinimumAttributeValueArray[1]);
@@ -143,15 +143,15 @@ void Calculate_TemperatureSimpleMovingAverage(int NoOfEnteries)
 
 
 /********************************************************************************************************************************
- * Function: Calculate_TemperatureSimpleMovingAverage
+ * Function: Calculate_SoCSimpleMovingAverage
  * Description: This function calculates the average value of SoC over latest 5 data points.
  * input: The number of data values available	  
  * returns: The average value of temperature in the given range
  ******************************************************************************************************************************/
-void Calculate_ChargeRateSimpleMovingAverage(int NoOfEnteries)
+void Calculate_SoCSimpleMovingAverage(int NoOfEnteries)
 {
-  float ChargeRate_SMA= Calculate_SimpleMovingAverage(ChargeRate, NoOfEnteries);
-  printf("Simple moving average of Charge Rate is %0.2f\n",ChargeRate_SMA);
+  float SoC_SMA= Calculate_SimpleMovingAverage(SoC, NoOfEnteries);
+  printf("Simple moving average of Charge Rate is %0.2f\n",SoC_SMA);
 }
 
 
@@ -193,9 +193,9 @@ OperationMode ReceiveDatafromSender ()
     if (ReadStatus)
     	{
 	    Calculate_TemperatureMinandMaxRange(NoOfEntery);
-	    Calculate_ChargeRateMinandMaxRange(NoOfEntery);
+	    Calculate_SoCMinandMaxRange(NoOfEntery);
 	    Calculate_TemperatureSimpleMovingAverage(NoOfEntery);
-	    Calculate_ChargeRateSimpleMovingAverage(NoOfEntery);
+	    Calculate_SoCSimpleMovingAverage(NoOfEntery);
         }
     return (ReadStatus);
 }
