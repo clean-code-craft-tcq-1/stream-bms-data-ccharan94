@@ -10,7 +10,7 @@ OperationMode BMS_ReadfromConsole()
 {
   FILE *BMS_datafile;
   int line=1, Index=0;
-  ReadStatus= Failure;
+  OperationMode ReadStatus= Failure;
 
   BMS_datafile=fopen("BMS_attributelog.txt", "r");
   if (BMS_datafile==NULL)
@@ -44,8 +44,8 @@ else
 
 void Calculate_TemperatureMinandMaxRange(int NoOfEnteries)
 {
- Calculate_MinParameterValue(Temperature[NoOfEnteries], &MinimumAttributeValueArray[0]);
- Calculate_MaxParameterValue(Temperature[NoOfEnteries], &MaximumAttributeValueArray[0]);
+ Calculate_MinParameterValue(Temperature, NoOfEnteries, &MinimumAttributeValueArray[0]);
+ Calculate_MaxParameterValue(Temperature, NoOfEnteries, &MaximumAttributeValueArray[0]);
  printf("Minimum and Maximum Temperature in the given range is %0.2f and %0.2f respectively\n",MinimumAttributeValueArray[0],MaximumAttributeValueArray[0]);
 }
 
@@ -54,13 +54,13 @@ void Calculate_TemperatureMinandMaxRange(int NoOfEnteries)
 void Calculate_ChargeRateMinandMaxRange(int NoOfEnteries)
 {
   
-  Calculate_MinParameterValue(ChargeRate[NoOfEnteries], &MinimumAttributeValueArray[1]);
-  Calculate_MaxParameterValue(ChargeRate[NoOfEnteries], &MaximumAttributeValueArray[1]);
+  Calculate_MinParameterValue(ChargeRate, NoOfEnteries, &MinimumAttributeValueArray[1]);
+  Calculate_MaxParameterValue(ChargeRate, NoOfEnteries, &MaximumAttributeValueArray[1]);
   printf("Minimum and Maximum ChargeRate in the given range is %0.2f and %0.2f respectively\n",MinimumAttributeValueArray[1],MaximumAttributeValueArray[1]);
 }
 /***********************************************************************************************************************
 **************************************************************************************************************************/
- void Calculate_MaxParameterValue(float AttributeValue[NoOfEnteries], float *MaximumAttributeValue)
+ void Calculate_MaxParameterValue(float AttributeValue[], int NoOfEnteries, float *MaximumAttributeValue)
  {
    for(int i=0; i< NoOfEnteries; i++)
    {
@@ -73,7 +73,7 @@ void Calculate_ChargeRateMinandMaxRange(int NoOfEnteries)
  }
 /***********************************************************************************************************************
 **************************************************************************************************************************/    
-void Calculate_MinParameterValue(float AttributeValue[NoOfEnteries], float *MinimumAttributeValue)
+void Calculate_MinParameterValue(float AttributeValue[], int NoOfEnteries, float *MinimumAttributeValue)
  {
   for(int i=0; i< NoOfEnteries; i++)
    {
@@ -88,19 +88,19 @@ void Calculate_MinParameterValue(float AttributeValue[NoOfEnteries], float *Mini
 **************************************************************************************************************************/
 void Calculate_TemperatureSimpleMovingAverage(int NoOfEnteries)
 {
-  float Temperature_SMA= Calculate_SimpleMovingAverage(Temperature[NoOfEnteries]);
+  float Temperature_SMA= Calculate_SimpleMovingAverage(Temperature, NoOfEnteries);
   printf("Simple moving average of Temperature is %0.2f\n",Temperature_SMA);
 }
 /***********************************************************************************************************************
 **************************************************************************************************************************/
 void Calculate_ChargeRateSimpleMovingAverage(int NoOfEnteries)
 {
-  float ChargeRate_SMA= Calculate_SimpleMovingAverage(ChargeRate[NoOfEnteries]);
+  float ChargeRate_SMA= Calculate_SimpleMovingAverage(ChargeRate, NoOfEnteries);
   printf("Simple moving average of Charge Rate is %0.2f\n",ChargeRate_SMA);
 }
 /***********************************************************************************************************************
 **************************************************************************************************************************/
-float Calculate_SimpleMovingAverage(float AttributeValue[NoOfEnteries])
+float Calculate_SimpleMovingAverage(float AttributeValue[], int NoOfEnteries)
 {
   float AttributeAverage = 0;
   float AttributeSum = 0;
