@@ -108,7 +108,7 @@ float Calculate_SimpleMovingAverage(float AttributeValue[], int NoOfEnteries)
   float AttributeAverage = 0;
   float AttributeSum = 0;
   int i=0;
-  while(NoOfEnteries>5)
+  while(NoOfEnteries!=0)
    {
      AttributeSum+= AttributeValue[i];
      i++;
