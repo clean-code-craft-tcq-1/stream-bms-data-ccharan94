@@ -5,6 +5,8 @@
 **************************************************************************************************************************/
 float MinimumAttributeValueArray[NumberOfAttributes]= {0,0};
 float MaximumAttributeValueArray[NumberOfAttributes]= {0,0};
+float Temperature[]={};
+float ChargeRate[]={};
 
 OperationMode BMS_ReadfromConsole()
 {
