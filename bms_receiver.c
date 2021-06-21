@@ -3,7 +3,7 @@
 
 /***********************************************************************************************************************
 **************************************************************************************************************************/
-OperationMode BMS_Readfromdatafile(line)
+OperationMode BMS_ReadfromConsole()
 {
   FILE *BMS_datafile;
   int line=1;
@@ -115,13 +115,13 @@ float Calculate_SimpleMovingAverage(float AttributeValue[NoOfEnteries])
 **************************************************************************************************************************/
 int main()
 {
-  ReadStatus= ReadSenderdataFromConsole();
+  ReadStatus= BMS_ReadfromConsole()();
   for (int index=0; index < NoOfEnteries; index++)
   {
-    Calculate_TemperatureMinandMaxRange(int NoOfEnteries);
-    Calculate_ChargeRateMinandMaxRange(int NoOfEnteries);
-    Calculate_TemperatureSimpleMovingAverage(int NoOfEnteries);
-    Calculate_ChargeRateSimpleMovingAverage(int NoOfEnteries);
+    Calculate_TemperatureMinandMaxRange(NoOfEnteries);
+    Calculate_ChargeRateMinandMaxRange(NoOfEnteries);
+    Calculate_TemperatureSimpleMovingAverage(NoOfEnteries);
+    Calculate_ChargeRateSimpleMovingAverage(NoOfEnteries);
   }
   return 0;
 }
