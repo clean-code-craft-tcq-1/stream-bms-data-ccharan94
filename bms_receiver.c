@@ -32,7 +32,7 @@ else
           ChargeRate[Index]=ReadChargeRate;
           Index++;
         }
-        NoOfEnteries= Index;
+        NoOfEntery= Index;
         ReadStatus= Success;
     }
 	
@@ -44,8 +44,8 @@ else
 
 void Calculate_TemperatureMinandMaxRange(int NoOfEnteries)
 {
- Calculate_MinParameterValue(Temperature, NoOfEnteries, &MinimumAttributeValueArray[0]);
- Calculate_MaxParameterValue(Temperature, NoOfEnteries, &MaximumAttributeValueArray[0]);
+ Calculate_MinParameterValue(Temperature[], NoOfEnteries, &MinimumAttributeValueArray[0]);
+ Calculate_MaxParameterValue(Temperature[], NoOfEnteries, &MaximumAttributeValueArray[0]);
  printf("Minimum and Maximum Temperature in the given range is %0.2f and %0.2f respectively\n",MinimumAttributeValueArray[0],MaximumAttributeValueArray[0]);
 }
 
@@ -54,8 +54,8 @@ void Calculate_TemperatureMinandMaxRange(int NoOfEnteries)
 void Calculate_ChargeRateMinandMaxRange(int NoOfEnteries)
 {
   
-  Calculate_MinParameterValue(ChargeRate, NoOfEnteries, &MinimumAttributeValueArray[1]);
-  Calculate_MaxParameterValue(ChargeRate, NoOfEnteries, &MaximumAttributeValueArray[1]);
+  Calculate_MinParameterValue(ChargeRate[], NoOfEnteries, &MinimumAttributeValueArray[1]);
+  Calculate_MaxParameterValue(ChargeRate[], NoOfEnteries, &MaximumAttributeValueArray[1]);
   printf("Minimum and Maximum ChargeRate in the given range is %0.2f and %0.2f respectively\n",MinimumAttributeValueArray[1],MaximumAttributeValueArray[1]);
 }
 /***********************************************************************************************************************
@@ -88,14 +88,14 @@ void Calculate_MinParameterValue(float AttributeValue[], int NoOfEnteries, float
 **************************************************************************************************************************/
 void Calculate_TemperatureSimpleMovingAverage(int NoOfEnteries)
 {
-  float Temperature_SMA= Calculate_SimpleMovingAverage(Temperature, NoOfEnteries);
+  float Temperature_SMA= Calculate_SimpleMovingAverage(Temperature[], NoOfEnteries);
   printf("Simple moving average of Temperature is %0.2f\n",Temperature_SMA);
 }
 /***********************************************************************************************************************
 **************************************************************************************************************************/
 void Calculate_ChargeRateSimpleMovingAverage(int NoOfEnteries)
 {
-  float ChargeRate_SMA= Calculate_SimpleMovingAverage(ChargeRate, NoOfEnteries);
+  float ChargeRate_SMA= Calculate_SimpleMovingAverage(ChargeRate[], NoOfEnteries);
   printf("Simple moving average of Charge Rate is %0.2f\n",ChargeRate_SMA);
 }
 /***********************************************************************************************************************
@@ -120,12 +120,12 @@ float Calculate_SimpleMovingAverage(float AttributeValue[], int NoOfEnteries)
 int main()
 {
   OperationMode ReadStatus= BMS_ReadfromConsole();
-  for (int index=0; index < NoOfEnteries; index++)
+  for (int index=0; index < NoOfEntery; index++)
   {
-    Calculate_TemperatureMinandMaxRange(NoOfEnteries);
-    Calculate_ChargeRateMinandMaxRange(NoOfEnteries);
-    Calculate_TemperatureSimpleMovingAverage(NoOfEnteries);
-    Calculate_ChargeRateSimpleMovingAverage(NoOfEnteries);
+    Calculate_TemperatureMinandMaxRange(NoOfEntery);
+    Calculate_ChargeRateMinandMaxRange(NoOfEntery);
+    Calculate_TemperatureSimpleMovingAverage(NoOfEntery);
+    Calculate_ChargeRateSimpleMovingAverage(NoOfEntery);
   }
   return 0;
 }
