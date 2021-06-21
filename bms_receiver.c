@@ -47,7 +47,7 @@ OperationMode BMS_ReadfromConsole()
 
 	      while(line != EOF)
 		{
-		  line=fscanf(BMS_datafile,"%f %f",&ReadTemperature,&ReadChargeRate);
+		  line=fscanf(BMS_datafile,"%f %f",&ReadTemperature,&ReadSoC);
 		  Temperature[Index]=ReadTemperature;
 		  SoC[Index]=ReadSoC;
 		  Index++;
