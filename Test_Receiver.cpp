@@ -9,7 +9,7 @@ TEST_CASE("To check if file was successfully opened to read")
   REQUIRE(BMS_ReadfromConsole()== Success); 
 }
 
-TEST_CASE("To check data is printed on the console") 
+TEST_CASE("To check Minimum, Maximum and SMA of data from a file") 
 {
   REQUIRE(ReceiveDatafromSender()== Success);
   
