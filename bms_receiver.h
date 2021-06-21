@@ -23,5 +23,5 @@ extern void Calculate_MaxParameterValue(float AttributeValue[], int NoOfEnteries
 extern void Calculate_MinParameterValue(float AttributeValue[], int NoOfEnteries, float *MinimumAttributeValue);
 extern void Calculate_TemperatureSimpleMovingAverage(int NoOfEnteries);
 extern void Calculate_ChargeRateSimpleMovingAverage(int NoOfEnteries);
-extern float Calculate_SimpleMovingAverage(float AttributeValue[Max_ArraySize], int NoOfEnteries);
+extern float Calculate_SimpleMovingAverage(float AttributeValue[], int NoOfEnteries);
   
