@@ -123,7 +123,7 @@ float Calculate_SimpleMovingAverage(float AttributeValue[], int NoOfEnteries)
 int main()
 {
   OperationMode ReadStatus= BMS_ReadfromConsole();
-  for (int index=0; index < NoOfEntery; index++)
+  for (int index=0; index < 500; index++)
   {
     Calculate_TemperatureMinandMaxRange(NoOfEntery);
     Calculate_ChargeRateMinandMaxRange(NoOfEntery);
