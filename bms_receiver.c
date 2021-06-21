@@ -13,7 +13,7 @@ float TemperatureValue[Length];
  float AttributeValue1, AttributeValue2=0;
   
   
-  scanf("%s%f,%s%f\n", Attribute1, &AttributeValue1, Attribute2, &AttributeValue2);
+  scanf("%s:%f,%s:%f\n", Attribute1, &AttributeValue1, Attribute2, &AttributeValue2);
   printf("%0.2f,%0.2f\n",AttributeValue1,AttributeValue2);
 /* while (scanf("%s%f,%s%f\n", Attribute1, &AttributeValue1, Attribute2, &AttributeValue2)!=EOF)
  {
