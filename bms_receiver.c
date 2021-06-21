@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
 #include "bms_receiver.h"
 
 /***********************************************************************************************************************
@@ -107,11 +109,10 @@ float Calculate_SimpleMovingAverage(float AttributeValue[], int NoOfEnteries)
 {
   float AttributeAverage = 0;
   float AttributeSum = 0;
-  int i=0;
-  while(NoOfEnteries!=0)
+  for(int i=0; i< NoOfEnteries; i++)
    {
      AttributeSum+= AttributeValue[i];
-     i++;
+     
    }
    AttributeAverage = AttributeSum/NoOfEnteries;
 
