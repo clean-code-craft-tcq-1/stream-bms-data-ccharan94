@@ -22,7 +22,7 @@ TEST_CASE("Test case to test the Maximum Value with lesser Value")
   float actualMaxValue= 40;
   float MaximumValue=0;
   int ArraySize= sizeof(AttributeArray)/sizeof(AttributeArray[0]);
-  Calculate_MaxParameterValue(AttributeValue[], ArraySize, &MaximumValue);
+  Calculate_MaxParameterValue(AttributeValue, ArraySize, &MaximumValue);
   REQUIRE(MaximumValue == actualMaxValue);
 }
 
