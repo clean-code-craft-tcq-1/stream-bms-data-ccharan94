@@ -71,7 +71,7 @@ void Calculate_TemperatureMinandMaxRange(int NoOfEnteries)
 {
  Calculate_MinParameterValue(Temperature, NoOfEnteries, &MinimumAttributeValueArray[0]);
  Calculate_MaxParameterValue(Temperature, NoOfEnteries, &MaximumAttributeValueArray[0]);
- printf("Minimum and Maximum Temperature in the given range is %0.2f and %0.2f respectively\n",MinimumAttributeValueArray[0],MaximumAttributeValueArray[0]);
+ printf("Minimum and Maximum Temperature in the given range is %0.2f F and %0.2f F respectively\n",MinimumAttributeValueArray[0],MaximumAttributeValueArray[0]);
 }
 
 
@@ -87,7 +87,7 @@ void Calculate_SoCMinandMaxRange(int NoOfEnteries)
   
   Calculate_MinParameterValue(SoC, NoOfEnteries, &MinimumAttributeValueArray[1]);
   Calculate_MaxParameterValue(SoC, NoOfEnteries, &MaximumAttributeValueArray[1]);
-  printf("Minimum and Maximum ChargeRate in the given range is %0.2f and %0.2f respectively\n",MinimumAttributeValueArray[1],MaximumAttributeValueArray[1]);
+  printf("Minimum and Maximum State-of-Charge in the given range is %0.2f%% and %0.2f%% respectively\n",MinimumAttributeValueArray[1],MaximumAttributeValueArray[1]);
 }
 
 
@@ -138,7 +138,7 @@ void Calculate_MinParameterValue(float AttributeValue[], int NoOfEnteries, float
 void Calculate_TemperatureSimpleMovingAverage(int NoOfEnteries)
 {
   float Temperature_SMA= Calculate_SimpleMovingAverage(Temperature, NoOfEnteries);
-  printf("Simple moving average of Temperature is %0.2f\n",Temperature_SMA);
+  printf("Simple moving average of Temperature is %0.2f F\n",Temperature_SMA);
 }
 
 
@@ -151,7 +151,7 @@ void Calculate_TemperatureSimpleMovingAverage(int NoOfEnteries)
 void Calculate_SoCSimpleMovingAverage(int NoOfEnteries)
 {
   float SoC_SMA= Calculate_SimpleMovingAverage(SoC, NoOfEnteries);
-  printf("Simple moving average of Charge Rate is %0.2f\n",SoC_SMA);
+  printf("Simple moving average of State-of-Charge is %0.2f%%\n",SoC_SMA);
 }
 
 
