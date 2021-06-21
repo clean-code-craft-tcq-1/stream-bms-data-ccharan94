@@ -15,7 +15,7 @@ TEST_CASE("To check data is printed on the console")
   
 }
 
-TEST_CASE("Test case to test the Maximum Value with lesser Value")
+TEST_CASE("Test case to test the Maximum Value in an array")
 {
   
   float AttributeArray[]={10,20,30,40,10};
@@ -26,69 +26,56 @@ TEST_CASE("Test case to test the Maximum Value with lesser Value")
   REQUIRE(MaximumValue == actualMaxValue);
 }
 
-/*TEST_CASE("Test case to test the Maximum Value with greater Value")
+TEST_CASE("Test case to test the Maximum Value in an array with negative values")
 {
-  float current_value = 100.8;
-  float prev_maxi = 2;
-  float prev_min = 0;
-  float max_value = 100.8;
-  Calc_MinMax(current_value, &prev_maxi, &prev_min);
-  REQUIRE(current_value == max_value);
+  
+  float AttributeArray[]={10,20,30,40,10,-20};
+  float actualMaxValue= 40;
+  float MaximumValue=0;
+  int ArraySize= sizeof(AttributeArray)/sizeof(AttributeArray[0]);
+  Calculate_MaxParameterValue(AttributeArray, ArraySize, &MaximumValue);
+  REQUIRE(MaximumValue == actualMaxValue);
 }
 
-TEST_CASE("Test case to test the Maximum Value with Negative Value")
+TEST_CASE("Test case to test the Minimum Value in an array")
 {
-  float current_value = -1.8;
-  float prev_maxi = -29;
-  float max_value = -1.8;
-  float prev_min = 0;
-  Calc_MinMax(current_value, &prev_maxi, &prev_min);
-  REQUIRE(prev_maxi == max_value);
+  
+  float AttributeArray[]={10,20,30,40,10,5,2,8};
+  float actualMinValue= 2;
+  float MinimumValue=100;
+  int ArraySize= sizeof(AttributeArray)/sizeof(AttributeArray[0]);
+  Calculate_MinParameterValue(AttributeArray, ArraySize, &MinimumValue);
+  REQUIRE(MinimumValue == actualMinValue);
 }
 
-TEST_CASE("Test case to test the Minimum Value with lesser Value")
+TEST_CASE("Test case to test the Minimum Value in an array with negative values")
 {
-  float current_value = 9.8;
-  float prev_min = 11.8;
-  float min_value = 9.8;
-  float prev_maxi = 0;
-  Calc_MinMax(current_value, &prev_maxi, &prev_min);
-  REQUIRE(prev_min == current_value);
+  
+  float AttributeArray[]={10,20,30,40,10,5,2,8,-20,-18};
+  float actualMinValue= -20;
+  float MinimumValue=-10;
+  int ArraySize= sizeof(AttributeArray)/sizeof(AttributeArray[0]);
+  Calculate_MinParameterValue(AttributeArray, ArraySize, &MinimumValue);
+  REQUIRE(MinimumValue == actualMinValue);
 }
 
-TEST_CASE("Test case to test the Minimum Value with greater Value")
+TEST_CASE("Test case to test the Simple Moving Average")
 {
-  float current_value = 187.5;
-  float prev_min = 181.8;
-  float min_value = 181.8;
-  float prev_maxi = 0;
-  Calc_MinMax(current_value, &prev_maxi, &prev_min);
-  REQUIRE(prev_min == min_value);
-}
-
-TEST_CASE("Test case to test the Minimum Value with negative Value")
-{
-  float current_value = -0.5;
-  float prev_min = -1.8;
-  float mini_value = -1.8;
-  float prev_maxi = 0;
-  Calc_MinMax(current_value, &prev_maxi, &prev_min);
-  REQUIRE(prev_min == mini_value);
-}
-
-TEST_CASE("Test case to test the Average Value")
-{
-  float arr[] = {10.3,10.1};
-  float average = (10.3+10.1)/2;
-  float calc_aver = 0;
-  float epsilon = 0.001;
-  calc_aver = Calc_Average(arr, 2);
-  REQUIRE(abs(calc_aver - average) < epsilon);
-}
-
-TEST_CASE("Test case to test the empty array for average")
-{
-  float arr[] = {};
+  float AttributeArray[]={10,20,30,40,10,5,2,8};
+  float Actualaverage = (40+10+5+2+8)/5;
   float average = 0;
-  REQUIRE(Calc_Average(arr, 0) == average);
-}*/
+  float epsilon = 0.001;
+  int ArraySize= sizeof(AttributeArray)/sizeof(AttributeArray[0]);
+  average = Calculate_SimpleMovingAverage(AttributeArray, ArraySize);
+  REQUIRE(abs(average - Actualaverage) < epsilon);
+}
+
+TEST_CASE("Test case to test the SMA when array is empty")
+{
+  float AttributeArray[]={};
+  float Actualaverage = 0;
+  float epsilon = 0.001;
+  int ArraySize= sizeof(AttributeArray)/sizeof(AttributeArray[0]);
+  REQUIRE(Calculate_SimpleMovingAverage(AttributeArray, ArraySize)==Actualaverage);
+  
+}
