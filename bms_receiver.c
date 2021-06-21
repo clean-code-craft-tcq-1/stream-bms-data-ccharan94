@@ -1,45 +1,127 @@
 #include <stdio.h>
-#include <math.h>
-#include <stdlib.h>
-#include <string.h>
-#include <time.h>
-void delay(int number_of_seconds);
-void  ReadSenderdataFromConsole() 
+#include <bms_receiver.h>
+
+/***********************************************************************************************************************
+**************************************************************************************************************************/
+OperationMode BMS_Readfromdatafile(line)
 {
-  int Length=1024,line=0;
-char Attribute1[Length],Attribute2[Length];
-float TemperatureValue[Length];
- float SoCValue[Length];
- float AttributeValue1, AttributeValue2=0;
-  
-  
-  scanf("%s%f,%s%f", Attribute1, &AttributeValue1, Attribute2, &AttributeValue2);
-  printf("%0.2f,%0.2f\n",AttributeValue1,AttributeValue2);
-/* while (scanf("%s%f,%s%f\n", Attribute1, &AttributeValue1, Attribute2, &AttributeValue2)!=EOF)
- {
-   //printf("%s%0.2f,%s0.2%f\n",Attribute1, AttributeValue1, Attribute2, AttributeValue2);
-   TemperatureValue[line]=AttributeValue1;
-   SoCValue[line]= AttributeValue2;
-   printf("%0.2f,%0.2f\n",AttributeValue1,AttributeValue2);
-   delay (10);
-   line++;
- }	 */
- //scanf("%s%f,%s%f\n", Attribute1, &AttributeValue1, Attribute2, &AttributeValue2);
- //printf("%[^{]s%0.2f,%s0.2%f\n",Attribute1, AttributeValue1, Attribute2, AttributeValue2);
+  FILE *BMS_datafile;
+  int line=1;
+  ReadStatus= Failure;
+
+  BMS_datafile=fopen("BMS_attributelog.txt", "r");
+  if (BMS_datafile==NULL)
+    {
+      printf("File open attempt failed\n");
+
+    }
+	
+	else
+    {
+    
+      float ReadTemperature=0,ReadChargeRate=0;
+      printf("File open attempt successful\n");
+    
+      while(line != EOF)
+        {
+          line=fscanf(BMS_datafile,"%f %f",&ReadTemperature,&ReadChargeRate);
+          Temperature[Index]=ReadTemperature;
+          ChargeRate[Index]=ReadChargeRate;
+          Index++;
+        }
+        NoOfEnteries= Index;
+        ReadStatus= Success;
+    }
+	
+	fclose(BMS_datafile);
+	return ReadStatus;
 }
-/*void delay(int number_of_seconds)
+/***********************************************************************************************************************
+**************************************************************************************************************************/
+
+void Calculate_TemperatureMinandMaxRange(int NoOfEnteries)
+{
+ Calculate_MinParameterValue(Temperature[NoOfEnteries], &MinimumAttributeValueArray[0]);
+ Calculate_MaxParameterValue(Temperature[NoOfEnteries], &MaximumAttributeValueArray[0]);
+ printf("Minimum and Maximum Temperature in the given range is %0.2f and %0.2f respectively\n",MinimumAttributeValueArray[0],MaximumAttributeValueArray[0]);
+}
+
+/***********************************************************************************************************************
+**************************************************************************************************************************/
+void Calculate_ChargeRateMinandMaxRange(int NoOfEnteries)
 {
   
-  int milli_seconds = 1000 * number_of_seconds;
+  MinimumChargeRate= Calculate_MinParameterValue(ChargeRate[NoOfEnteries], &MinimumAttributeValueArray[1]);
+  MaximumChargeRate= Calculate_MaxParameterValue(ChargeRate[NoOfEnteries], &MaximumAttributeValueArray[1]);
+  printf("Minimum and Maximum ChargeRate in the given range is %0.2f and %0.2f respectively\n",MinimumAttributeValueArray[1],MaximumAttributeValueArray[1]);
+}
+/***********************************************************************************************************************
+**************************************************************************************************************************/
+ void Calculate_MaxParameterValue(float AttributeValue[int NoOfEnteries], float *MaximumAttributeValue)
+ {
+   for(int i=0; i< NoOfEnteries; i++)
+   {
+        if(AttributeValue[i] > *MaximumAttributeValue)
+        {
+            *MaximumAttributeValue = AttributeValue[i];
+        }
+   }
+ }
+/***********************************************************************************************************************
+**************************************************************************************************************************/    
+void Calculate_MinParameterValue(float AttributeValue[int NoOfEnteries], float *MinimumAttributeValue)
+ {
+  for(int i=0; i< NoOfEnteries; i++)
+   {
+     
+     if(AttributeValue[i] < *MinimumAttributeValue)
+          {
+              *MinimumAttributeValue = AttributeValue[i];
+          }
+   }
+}
+/***********************************************************************************************************************
+**************************************************************************************************************************/
+void Calculate_TemperatureSimpleMovingAverage(int NoOfEnteries)
+{
+  float Temperature_SMA= Calculate_SimpleMovingAverage(Temperature[NoOfEnteries]);
+  printf("Simple moving average of Temperature is %0.2f\n",Temperature_SMA);
+}
+/***********************************************************************************************************************
+**************************************************************************************************************************/
+void Calculate_ChargeRateSimpleMovingAverage(int NoOfEnteries)
+{
+  float ChargeRate_SMA= Calculate_SimpleMovingAverage(ChargeRate[NoOfEnteries]);
+  printf("Simple moving average of Charge Rate is %0.2f\n",ChargeRate_SMA);
+}
+/***********************************************************************************************************************
+**************************************************************************************************************************/
+float Calculate_SimpleMovingAverage(float AttributeValue[NoOfEnteries])
+{
+  float AttributeAverage = 0;
+  float AttributeSum = 0;
+  int i=0;
+  while(NoOfEnteries>5)
+   {
+     AttributeSum+= AttributeValue[i];
+     i++;
+   }
+   AttributeAverage = AttributeSum/NoOfEnteries;
 
+   return AttributeAverage;
   
-  clock_t start_time = clock();
-
-  while (clock() < start_time + milli_seconds);
-}*/
-
+}
+/***********************************************************************************************************************
+**************************************************************************************************************************/
 int main()
 {
-  ReadSenderdataFromConsole();
+  ReadStatus= ReadSenderdataFromConsole();
+  for (int index=0; index < NoOfEnteries; index++)
+  {
+    Calculate_TemperatureMinandMaxRange(int NoOfEnteries);
+    Calculate_ChargeRateMinandMaxRange(int NoOfEnteries);
+    Calculate_TemperatureSimpleMovingAverage(int NoOfEnteries);
+    Calculate_ChargeRateSimpleMovingAverage(int NoOfEnteries);
+  }
   return 0;
 }
