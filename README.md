@@ -15,29 +15,22 @@ The Receiver processes the data.
 
 The Sender and Receiver are testable on their own.
 
-## Decomposition of responsibility
-
-The naming of source files within the Sender and within the Receiver
-give their internal decomposition.
-
-## Minimum Functionality
-
-This section lists the minimum functionality of the Sender and Receiver.
+## Functionality Implemented
 
 ### The Sender
 
-- sends two Battery / Charging parameters: BMS Temperature and State-Of-Charge
+- sends two Battery parameters: BMS Temperature and State-Of-Charge
 - sends these parameters in a stream (keeps sending automatically till the user stops)
 - Is sending in JSON format
 - uses console output to communicate the parameters.
 
 ### The Receiver
 
-- reads the parameters from the data file (currently)
+- reads the parameters from the data file (.txt format currently, the piping is in process)
 - after reading every parameter, it prints the following:
     - maximum and minimum values in the incoming stream
-    - [simple moving average](https://www.investopedia.com/terms/s/sma.asp) of the last 5 values
+    - Simple moving average of latest 5 values
 
 ## Quality Parameters
 
-Setup the quality parameters of your project (duplication, complexity, coverage, warnings) using the GitHub workflow yml files.
+Quality parameters set are: duplication, complexity, coverage, warnings.
