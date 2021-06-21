@@ -7,6 +7,7 @@ float MinimumAttributeValueArray[NumberOfAttributes]= {0,0};
 float MaximumAttributeValueArray[NumberOfAttributes]= {0,0};
 float Temperature[]={};
 float ChargeRate[]={};
+int NoOfEntery=0;
 
 OperationMode BMS_ReadfromConsole()
 {
@@ -121,7 +122,6 @@ float Calculate_SimpleMovingAverage(float AttributeValue[], int NoOfEnteries)
 **************************************************************************************************************************/
 int main()
 {
-  int NoOfEntery=0;
   OperationMode ReadStatus= BMS_ReadfromConsole();
   for (int index=0; index < NoOfEntery; index++)
   {
