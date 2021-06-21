@@ -3,6 +3,9 @@
 
 /***********************************************************************************************************************
 **************************************************************************************************************************/
+MinimumAttributeValueArray[NumberOfAttributes]= {0,0};
+MaximumAttributeValueArray[NumberOfAttributes]= {0,0};
+
 OperationMode BMS_ReadfromConsole()
 {
   FILE *BMS_datafile;
