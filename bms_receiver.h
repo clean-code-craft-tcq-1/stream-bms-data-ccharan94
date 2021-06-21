@@ -17,11 +17,11 @@ extern float MinimumAttributeValueArray[NumberOfAttributes];
 extern float MaximumAttributeValueArray[NumberOfAttributes];
 
 extern OperationMode BMS_ReadfromConsole();
-extern void Calculate_TemperatureMinandMaxRange(int NoOfEnteries)
-extern void Calculate_ChargeRateMinandMaxRange(int NoOfEnteries)
-extern void Calculate_MaxParameterValue(float AttributeValue[int NoOfEnteries], float *MaximumAttributeValue)
-extern void Calculate_MinParameterValue(float AttributeValue[int NoOfEnteries], float *MinimumAttributeValue)
-extern void Calculate_TemperatureSimpleMovingAverage(int NoOfEnteries)
-extern void Calculate_ChargeRateSimpleMovingAverage(int NoOfEnteries)
-extern float Calculate_SimpleMovingAverage(float AttributeValue[NoOfEnteries])
+extern void Calculate_TemperatureMinandMaxRange(int NoOfEnteries);
+extern void Calculate_ChargeRateMinandMaxRange(int NoOfEnteries);
+extern void Calculate_MaxParameterValue(float AttributeValue[int NoOfEnteries], float *MaximumAttributeValue);
+extern void Calculate_MinParameterValue(float AttributeValue[int NoOfEnteries], float *MinimumAttributeValue);
+extern void Calculate_TemperatureSimpleMovingAverage(int NoOfEnteries);
+extern void Calculate_ChargeRateSimpleMovingAverage(int NoOfEnteries);
+extern float Calculate_SimpleMovingAverage(float AttributeValue[NoOfEnteries]);
   
