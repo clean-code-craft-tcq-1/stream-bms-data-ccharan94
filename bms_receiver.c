@@ -120,7 +120,7 @@ float Calculate_SimpleMovingAverage(float AttributeValue[], int NoOfEnteries)
 }
 /***********************************************************************************************************************
 **************************************************************************************************************************/
-int main()
+void ReceiveDatafromSender ()
 {
   OperationMode ReadStatus= BMS_ReadfromConsole();
   for (int index=0; index < 500; index++)
@@ -130,5 +130,5 @@ int main()
     Calculate_TemperatureSimpleMovingAverage(NoOfEntery);
     Calculate_ChargeRateSimpleMovingAverage(NoOfEntery);
   }
-  return 0;
+  
 }
