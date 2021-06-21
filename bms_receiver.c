@@ -13,35 +13,23 @@ int NoOfEntery=0;
 
 OperationMode BMS_ReadfromConsole()
 {
-  FILE *BMS_datafile;
+  
   int line=1, Index=0;
   OperationMode ReadStatus= Failure;
-
-  BMS_datafile=fopen("BMS_attributelog.txt", "r");
-  if (BMS_datafile==NULL)
-    {
-      printf("File open attempt failed\n");
-
-    }
 	
-else
-    {
-    
       float ReadTemperature=0,ReadChargeRate=0;
-      printf("File open attempt successful\n");
-    
+      char Attribute1, Attribute2;
       while(line != EOF)
         {
-          line=fscanf(BMS_datafile,"%f %f",&ReadTemperature,&ReadChargeRate);
+	  
+          line=scanf("%s%f,%s%f",Attribute1, &ReadTemperature,Attribute2, &ReadChargeRate);
           Temperature[Index]=ReadTemperature;
           ChargeRate[Index]=ReadChargeRate;
+	  printf("%f %f", ReadTemperature,ReadChargeRate);
           Index++;
         }
         NoOfEntery= Index;
         ReadStatus= Success;
-    }
-	
-	fclose(BMS_datafile);
 	return ReadStatus;
 }
 /***********************************************************************************************************************
