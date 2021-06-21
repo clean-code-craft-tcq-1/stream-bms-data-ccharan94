@@ -119,6 +119,7 @@ float Calculate_SimpleMovingAverage(float AttributeValue[], int NoOfEnteries)
 **************************************************************************************************************************/
 int main()
 {
+  int NoOfEntery=0;
   OperationMode ReadStatus= BMS_ReadfromConsole();
   for (int index=0; index < NoOfEntery; index++)
   {
