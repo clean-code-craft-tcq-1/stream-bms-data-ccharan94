@@ -12,7 +12,7 @@ typedef enum {
 #define NumberOfAttributes 2
 extern float Temperature[Max_ArraySize];
 extern float ChargeRate[Max_ArraySize];
-extern int NoOfEnteries;
+extern int NoOfEntery;
 extern float MinimumAttributeValueArray[NumberOfAttributes];
 extern float MaximumAttributeValueArray[NumberOfAttributes];
 
