@@ -124,6 +124,7 @@ float Calculate_SimpleMovingAverage(float AttributeValue[], int NoOfEnteries)
 OperationMode ReceiveDatafromSender ()
 {
   OperationMode ReadStatus= BMS_ReadfromConsole();
+    printf("%d\n",NoOfEntery);
     Calculate_TemperatureMinandMaxRange(NoOfEntery);
     Calculate_ChargeRateMinandMaxRange(NoOfEntery);
     Calculate_TemperatureSimpleMovingAverage(NoOfEntery);
