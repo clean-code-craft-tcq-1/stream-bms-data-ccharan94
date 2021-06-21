@@ -3,13 +3,13 @@
 
 /***********************************************************************************************************************
 **************************************************************************************************************************/
-MinimumAttributeValueArray[NumberOfAttributes]= {0,0};
-MaximumAttributeValueArray[NumberOfAttributes]= {0,0};
+float MinimumAttributeValueArray[NumberOfAttributes]= {0,0};
+float MaximumAttributeValueArray[NumberOfAttributes]= {0,0};
 
 OperationMode BMS_ReadfromConsole()
 {
   FILE *BMS_datafile;
-  int line=1;
+  int line=1, Index=0;
   ReadStatus= Failure;
 
   BMS_datafile=fopen("BMS_attributelog.txt", "r");
@@ -19,7 +19,7 @@ OperationMode BMS_ReadfromConsole()
 
     }
 	
-	else
+else
     {
     
       float ReadTemperature=0,ReadChargeRate=0;
@@ -54,13 +54,13 @@ void Calculate_TemperatureMinandMaxRange(int NoOfEnteries)
 void Calculate_ChargeRateMinandMaxRange(int NoOfEnteries)
 {
   
-  MinimumChargeRate= Calculate_MinParameterValue(ChargeRate[NoOfEnteries], &MinimumAttributeValueArray[1]);
-  MaximumChargeRate= Calculate_MaxParameterValue(ChargeRate[NoOfEnteries], &MaximumAttributeValueArray[1]);
+  Calculate_MinParameterValue(ChargeRate[NoOfEnteries], &MinimumAttributeValueArray[1]);
+  Calculate_MaxParameterValue(ChargeRate[NoOfEnteries], &MaximumAttributeValueArray[1]);
   printf("Minimum and Maximum ChargeRate in the given range is %0.2f and %0.2f respectively\n",MinimumAttributeValueArray[1],MaximumAttributeValueArray[1]);
 }
 /***********************************************************************************************************************
 **************************************************************************************************************************/
- void Calculate_MaxParameterValue(float AttributeValue[int NoOfEnteries], float *MaximumAttributeValue)
+ void Calculate_MaxParameterValue(float AttributeValue[NoOfEnteries], float *MaximumAttributeValue)
  {
    for(int i=0; i< NoOfEnteries; i++)
    {
@@ -69,10 +69,11 @@ void Calculate_ChargeRateMinandMaxRange(int NoOfEnteries)
             *MaximumAttributeValue = AttributeValue[i];
         }
    }
+   
  }
 /***********************************************************************************************************************
 **************************************************************************************************************************/    
-void Calculate_MinParameterValue(float AttributeValue[int NoOfEnteries], float *MinimumAttributeValue)
+void Calculate_MinParameterValue(float AttributeValue[NoOfEnteries], float *MinimumAttributeValue)
  {
   for(int i=0; i< NoOfEnteries; i++)
    {
@@ -118,7 +119,7 @@ float Calculate_SimpleMovingAverage(float AttributeValue[NoOfEnteries])
 **************************************************************************************************************************/
 int main()
 {
-  ReadStatus= BMS_ReadfromConsole()();
+  OperationMode ReadStatus= BMS_ReadfromConsole();
   for (int index=0; index < NoOfEnteries; index++)
   {
     Calculate_TemperatureMinandMaxRange(NoOfEnteries);
