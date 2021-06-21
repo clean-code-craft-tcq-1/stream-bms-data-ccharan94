@@ -13,8 +13,8 @@ typedef enum {
 extern float Temperature[Max_ArraySize];
 extern float ChargeRate[Max_ArraySize];
 
-extern float MinimumAttributeValueArray[NumberOfAttributes]= {0,0};
-extern float MaximumAttributeValueArray[NumberOfAttributes]= {0,0};
+extern float MinimumAttributeValueArray[NumberOfAttributes];
+extern float MaximumAttributeValueArray[NumberOfAttributes];
 
 extern OperationMode BMS_ReadfromConsole();
 extern void Calculate_TemperatureMinandMaxRange(int NoOfEnteries)
