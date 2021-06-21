@@ -8,8 +8,8 @@ typedef enum {
   Success
 } OperationMode;
 
-#define Max_ArraySize=1024;
-#define NumberOfAttributes=2;
+#define Max_ArraySize 1024;
+#define NumberOfAttributes 2;
 extern float Temperature[Max_ArraySize];
 extern float ChargeRate[Max_ArraySize];
 
