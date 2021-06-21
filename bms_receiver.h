@@ -25,5 +25,5 @@ extern void Calculate_MinParameterValue(float AttributeValue[Max_ArraySize], int
 extern void Calculate_TemperatureSimpleMovingAverage(int NoOfEnteries);
 extern void Calculate_ChargeRateSimpleMovingAverage(int NoOfEnteries);
 extern float Calculate_SimpleMovingAverage(float AttributeValue[Max_ArraySize], int NoOfEnteries);
-extern void ReceiveDatafromSender();
+extern OperationMode ReceiveDatafromSender();
   
