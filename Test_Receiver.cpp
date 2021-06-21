@@ -1,7 +1,7 @@
 
 
 #include "test/catch.hpp"
-#include "BMS_AttributeDataSender.h"
+#include "bms_receiver.h"
 
 TEST_CASE("To check if file was successfully opened to read") 
 {
